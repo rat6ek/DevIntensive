@@ -1,3 +1,26 @@
 <resources>
-    <string name="app_name">DevIntensive</string>
+    <string name="app_name">Ратбек Нурланбек уулу</string>
+    <string name="item_1">Мобильный</string>
+    <string name="item_2">E-mail</string>
+    <string name="item_3">Профиль в VK</string>
+    <string name="item_4">Репозиторий</string>
+    <string name="item_5">О себе</string>
+
+
+    <string name="item_1_text">+7 (992) 018-33-55</string>
+    <string name="item_2_text">ratbek@gmail.com</string>
+    <string name="item_3_text">vk.com/ratbek</string>
+    <string name="item_4_text">github.com/rat6ek/DevIntensive</string>
+    <string name="item_5_text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Aliquam id felis non odio vulputate suscipit.
+        Sed aliquam nunc in felis semper, vel semper odio pharetra.
+    </string>
+
+    <string name="rating_text">Рейтинг</string>
+    <string name="rating_value">5</string>
+    <string name="code_text">Написано строк кода</string>
+    <string name="code_value">25000</string>
+    <string name="project_value">5</string>
+    <string name="project_text">Проектов</string>
 </resources>
