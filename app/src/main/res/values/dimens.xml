@@ -7,6 +7,8 @@
     <dimen name="size_small_24">24dp</dimen>
     <dimen name="size_medium_56">56dp</dimen>
     <dimen name="size_large_72">72dp</dimen>
+    <dimen name="text_normal_size_16">16sp</dimen>
+    <dimen name="text_medial_24">24sp</dimen>
     <!--Spaces-->
     <dimen name="spacing_small_8">8dp</dimen>
     <dimen name="spacing_normal_16">16dp</dimen>
@@ -14,4 +16,6 @@
     <dimen name="spacing_medium_32">32dp</dimen>
     <dimen name="spacing_large_56">56dp</dimen>
     <dimen name="spacing_larger_72">72dp</dimen>
+    <dimen name="line_size">1dp</dimen>
+    <dimen name="title_padding">4dp</dimen>
 </resources>
