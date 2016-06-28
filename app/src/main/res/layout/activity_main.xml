@@ -49,6 +49,62 @@
 
         </android.support.design.widget.AppBarLayout>
 
+        <LinearLayout
+            android:id="@+id/user_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey"
+            android:orientation="horizontal"
+            app:layout_behavior="@string/user_score_behavior">
+            <LinearLayout
+                android:id="@+id/rating_index_ll"
+                style="@style/header_inner_ll"
+                android:layout_weight="0.25">
+                <TextView
+                    android:id="@+id/rating_index_tv"
+                    style="@style/header_tv"
+                    android:text="@string/rating_value"
+                    android:textSize="@dimen/text_medial_24"/>
+                <TextView
+                    android:id="@+id/rating_text_tv"
+                    style="@style/header_tv"
+                    android:text="@string/rating_text"
+                    android:textSize="@dimen/text_normal_size_16"/>
+            </LinearLayout>
+            <View style="@style/vertical_line"></View>
+            <LinearLayout
+                android:id="@+id/code_intex_ll"
+                style="@style/header_inner_ll"
+                android:layout_weight="0.5">
+                <TextView
+                    android:id="@+id/code_index_tv"
+                    style="@style/header_tv"
+                    android:text="@string/code_value"
+                    android:textSize="@dimen/text_medial_24"/>
+                <TextView
+                    android:id="@+id/code_text_tv"
+                    style="@style/header_tv"
+                    android:text="@string/code_text"
+                    android:textSize="@dimen/text_normal_size_16"/>
+            </LinearLayout>
+            <View style="@style/vertical_line"></View>
+            <LinearLayout
+                android:id="@+id/project_index_ll"
+                style="@style/header_inner_ll"
+                android:layout_weight="0.25">
+                <TextView
+                    android:id="@+id/project_index_tv"
+                    style="@style/header_tv"
+                    android:text="@string/project_value"
+                    android:textSize="@dimen/text_medial_24"/>
+                <TextView
+                    android:id="@+id/project_text_tv"
+                    style="@style/header_tv"
+                    android:text="@string/project_text"
+                    android:textSize="@dimen/text_normal_size_16"/>
+            </LinearLayout>
+        </LinearLayout>
+
         <android.support.v4.widget.NestedScrollView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -59,62 +115,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <LinearLayout
-                    style="@style/item_ll"
-                    android:layout_margin="0dp"
-                    android:background="@color/grey"
-                    android:paddingTop="@dimen/spacing_normal_16"
-                    android:paddingBottom="@dimen/spacing_normal_16"
-                    android:baselineAligned="false">
-                    <LinearLayout
-                        android:id="@+id/rating_index_ll"
-                        style="@style/header_inner_ll"
-                        android:layout_weight="0.25">
-                        <TextView
-                            android:id="@+id/rating_index_tv"
-                            style="@style/header_tv"
-                            android:text="@string/rating_value"
-                            android:textSize="@dimen/text_medial_24"/>
-                        <TextView
-                            android:id="@+id/rating_text_tv"
-                            style="@style/header_tv"
-                            android:text="@string/rating_text"
-                            android:textSize="@dimen/text_normal_size_16"/>
-                    </LinearLayout>
-                    <View style="@style/vertical_line"></View>
-                    <LinearLayout
-                        android:id="@+id/code_intex_ll"
-                        style="@style/header_inner_ll"
-                        android:layout_weight="0.5">
-                        <TextView
-                            android:id="@+id/code_index_tv"
-                            style="@style/header_tv"
-                            android:text="@string/code_value"
-                            android:textSize="@dimen/text_medial_24"/>
-                        <TextView
-                            android:id="@+id/code_text_tv"
-                            style="@style/header_tv"
-                            android:text="@string/code_text"
-                            android:textSize="@dimen/text_normal_size_16"/>
-                    </LinearLayout>
-                    <View style="@style/vertical_line"></View>
-                    <LinearLayout
-                        android:id="@+id/project_index_ll"
-                        style="@style/header_inner_ll"
-                        android:layout_weight="0.25">
-                        <TextView
-                            android:id="@+id/project_index_tv"
-                            style="@style/header_tv"
-                            android:text="@string/project_value"
-                            android:textSize="@dimen/text_medial_24"/>
-                        <TextView
-                            android:id="@+id/project_text_tv"
-                            style="@style/header_tv"
-                            android:text="@string/project_text"
-                            android:textSize="@dimen/text_normal_size_16"/>
-                    </LinearLayout>
-                </LinearLayout>
 
                 <LinearLayout
                     style="@style/item_ll">

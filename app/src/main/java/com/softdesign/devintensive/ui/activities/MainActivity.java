@@ -1,5 +1,7 @@
 package com.softdesign.devintensive.ui.activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -14,10 +16,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.softdesign.devintensive.R;
 import com.softdesign.devintensive.data.managers.DataManager;
 import com.softdesign.devintensive.utils.ConstantManager;
+import com.softdesign.devintensive.utils.ImageCropper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +29,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = ConstantManager.TAG_PREFIX + "Main Activity";
+    private ImageCropper mHeaderAvatar;
     private Toolbar mToolbar;
     private CoordinatorLayout mCoordinatorLayout;
     private DrawerLayout mNavigationDrawer;
@@ -166,6 +171,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setupDrawer() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        View drawerHeader = navigationView.getHeaderView(0);
+        ImageView avatar = (ImageView) drawerHeader.findViewById(R.id.drawer_header_avatar);
+        Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.user_avatar);
+        mHeaderAvatar = new ImageCropper(img);
+        avatar.setImageDrawable(mHeaderAvatar);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
