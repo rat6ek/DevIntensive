@@ -1,6 +1,7 @@
 package com.softdesign.devintensive.ui.activities;
 
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -12,16 +13,28 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import com.softdesign.devintensive.R;
+import com.softdesign.devintensive.data.managers.DataManager;
 import com.softdesign.devintensive.utils.ConstantManager;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = ConstantManager.TAG_PREFIX + "Main Activity";
     private Toolbar mToolbar;
     private CoordinatorLayout mCoordinatorLayout;
     private DrawerLayout mNavigationDrawer;
+    private FloatingActionButton mFab;
+    private EditText mUserPhone, mUserMail, mUserVk, mUserGit, mUserBio;
+    private DataManager mDataManager;
+
+    private List<EditText> mUserInfo;
+
+    private int mCurrentEditMode = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +42,39 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate");
 
+
         mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_coordinator_container);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mNavigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
+        mFab = (FloatingActionButton) findViewById(R.id.fab);
+
+        mUserPhone = (EditText) findViewById(R.id.phone_et);
+        mUserMail = (EditText) findViewById(R.id.email_et);
+        mUserVk = (EditText) findViewById(R.id.vk_profile_et);
+        mUserGit = (EditText) findViewById(R.id.github_et);
+        mUserBio = (EditText) findViewById(R.id.about_et);
+        mDataManager = DataManager.getInstance();
+
+        mUserInfo = new ArrayList<>();
+        mUserInfo.add(mUserPhone);
+        mUserInfo.add(mUserMail);
+        mUserInfo.add(mUserVk);
+        mUserInfo.add(mUserGit);
+        mUserInfo.add(mUserBio);
 
         setupToolbar();
         setupDrawer();
+
+        mFab.setOnClickListener(this);
+
+        if (savedInstanceState == null) {
+            // активити запускается впервые
+        } else {
+            //активити уже запускалось
+            mCurrentEditMode = savedInstanceState.getInt(ConstantManager.EDIT_MODE_KEY, 0);
+            changeEditMode(mCurrentEditMode);
+        }
+        loadUserInfoValue();
     }
 
     @Override
@@ -61,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Log.d(TAG, "onPause");
+
+        loadUserInfoValue();
     }
 
     @Override
@@ -80,7 +122,28 @@ public class MainActivity extends AppCompatActivity {
         super.onRestart();
         Log.d(TAG, "onRestart");
     }
-    
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fab:
+                if (mCurrentEditMode == 0) {
+                    changeEditMode(1);
+                    mCurrentEditMode = 1;
+                } else {
+                    changeEditMode(0);
+                    mCurrentEditMode = 0;
+                }
+                break;
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(ConstantManager.EDIT_MODE_KEY, mCurrentEditMode);
+    }
+
     private void showSnackbar(String message) {
         Snackbar.make(mCoordinatorLayout, message, Snackbar.LENGTH_LONG).show();
     }
@@ -105,6 +168,50 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    /**
+     * Переключает режимы редактирования и чтения
+     * @param mode 1 - режим редактирования, 0 - режим чтения
+     */
+    private void changeEditMode(int mode) {
+        if (mode == 1) {
+            mFab.setImageResource(R.drawable.ic_done_black_24dp);
+            for (EditText userValue : mUserInfo) {
+                userValue.setEnabled(true);
+                userValue.setFocusable(true);
+                userValue.setFocusableInTouchMode(true);
+            }
+        } else {
+            mFab.setImageResource(R.drawable.ic_create_black_24dp);
+            for (EditText userValue : mUserInfo) {
+                userValue.setEnabled(false);
+                userValue.setFocusable(false);
+                userValue.setFocusableInTouchMode(false);
+            }
+            saveUserInfoValue();
+        }
+    }
+
+    /**
+     * Загружает данные из SharedPreferences
+     */
+    private void loadUserInfoValue() {
+        List<String> userData = mDataManager.getPreferencesManager().loadUserProfileData();
+        for (int i = 0; i < userData.size(); i++) {
+            mUserInfo.get(i).setText(userData.get(i));
+        }
+    }
+
+    /**
+     * Сохраняет введенные данные в SharedPreferences
+     */
+    private void saveUserInfoValue() {
+        List<String> userData = new ArrayList<>();
+        for (EditText userFieldView : mUserInfo) {
+            userData.add(userFieldView.getText().toString());
+        }
+        mDataManager.getPreferencesManager().saveUserProfileData(userData);
     }
 
 }
