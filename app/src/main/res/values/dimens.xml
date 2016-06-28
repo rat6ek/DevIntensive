@@ -18,4 +18,5 @@
     <dimen name="spacing_larger_72">72dp</dimen>
     <dimen name="line_size">1dp</dimen>
     <dimen name="title_padding">4dp</dimen>
+    <dimen name="profile_image_size">256dp</dimen>
 </resources>
