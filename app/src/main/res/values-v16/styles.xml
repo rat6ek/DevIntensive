@@ -11,7 +11,7 @@
         <item name="android:fontFamily">sans-serif-condensed</item>
     </style>
 
-    <style name="header_text_view">
+    <style name="header_tv">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center</item>
