@@ -128,6 +128,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d(TAG, "onRestart");
     }
 
+    /**
+     * Обрабатывает click'и
+     * @param v - view которое click'нули
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -149,6 +153,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         outState.putInt(ConstantManager.EDIT_MODE_KEY, mCurrentEditMode);
     }
 
+    /**
+     * Обрабатывает нажатия кнопки Back
+     */
     @Override
     public void onBackPressed() {
         if (mNavigationDrawer.isDrawerOpen(GravityCompat.START)) {
@@ -156,10 +163,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else super.onBackPressed();
     }
 
+    /**
+     * Абстракный метод, который показывает Snackbar с переданным ей message
+     * @param message - текст который будет показан в Snackbar'е
+     */
     private void showSnackbar(String message) {
         Snackbar.make(mCoordinatorLayout, message, Snackbar.LENGTH_LONG).show();
     }
 
+    /**
+     * Инициализирует Toolbar
+     */
     private void setupToolbar() {
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -169,6 +183,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Инициализирует NavigationDrawer
+     */
     private void setupDrawer() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         View drawerHeader = navigationView.getHeaderView(0);
@@ -212,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Загружает данные из SharedPreferences
+     * Загружает данные пользователя из SharedPreferences
      */
     private void loadUserInfoValue() {
         List<String> userData = mDataManager.getPreferencesManager().loadUserProfileData();
@@ -222,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Сохраняет введенные данные в SharedPreferences
+     * Сохраняет введенные данные пользователя в SharedPreferences
      */
     private void saveUserInfoValue() {
         List<String> userData = new ArrayList<>();

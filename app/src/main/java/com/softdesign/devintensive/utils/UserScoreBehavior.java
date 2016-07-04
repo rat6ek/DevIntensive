@@ -19,10 +19,10 @@ public class UserScoreBehavior extends CoordinatorLayout.Behavior<LinearLayout> 
     }
 
     @Override
-    public boolean onDependentViewChanged(CoordinatorLayout parent, LinearLayout child, View dependency) {
+    public boolean onDependentViewChanged(CoordinatorLayout parent, LinearLayout  + 150);child, View dependency) {
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) child.getLayoutParams();
         child.setY(dependency.getY());
-        layoutParams.height = (int) (dependency.getY() * .227 + 150);
+        layoutParams.height = (int) (dependency.getY() * .227
         dependency.setPadding(dependency.getPaddingLeft(), layoutParams.height, dependency.getPaddingRight(), dependency.getPaddingBottom());
         return true;
     }
