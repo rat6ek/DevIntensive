@@ -1,5 +1,6 @@
 package com.softdesign.devintensive.ui.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.design.widget.CoordinatorLayout;
@@ -29,18 +30,27 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = ConstantManager.TAG_PREFIX + "Main Activity";
-    private ImageCropper mHeaderAvatar;
     private Toolbar mToolbar;
     private CoordinatorLayout mCoordinatorLayout;
     private DrawerLayout mNavigationDrawer;
     private FloatingActionButton mFab;
-    private EditText mUserPhone, mUserMail, mUserVk, mUserGit, mUserBio;
     private DataManager mDataManager;
 
     private List<EditText> mUserInfo;
 
     private int mCurrentEditMode = 0;
 
+    /**
+     * Вызывается при ( создании Activity | изменения конфигураций | возврата к текущей Activity после его уничтожения )
+     * <p/>
+     * В данном методе инициализируется/производится:
+     *  - UI ( статика ),
+     *  - Статические данные Activity,
+     *  - Адаптеры ( связь данных со списками ),
+     *<p/>
+     * Не запускать длительные операций в данном методе
+     * @param savedInstanceState - объект со значениями сохраненными в Bundle - состояние UI
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,19 +63,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mNavigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
         mFab = (FloatingActionButton) findViewById(R.id.fab);
 
-        mUserPhone = (EditText) findViewById(R.id.phone_et);
-        mUserMail = (EditText) findViewById(R.id.email_et);
-        mUserVk = (EditText) findViewById(R.id.vk_profile_et);
-        mUserGit = (EditText) findViewById(R.id.github_et);
-        mUserBio = (EditText) findViewById(R.id.about_et);
+        EditText userPhone = (EditText) findViewById(R.id.phone_et);
+        EditText userMail = (EditText) findViewById(R.id.email_et);
+        EditText userVk = (EditText) findViewById(R.id.vk_profile_et);
+        EditText userGit = (EditText) findViewById(R.id.github_et);
+        EditText userBio = (EditText) findViewById(R.id.about_et);
         mDataManager = DataManager.getInstance();
 
         mUserInfo = new ArrayList<>();
-        mUserInfo.add(mUserPhone);
-        mUserInfo.add(mUserMail);
-        mUserInfo.add(mUserVk);
-        mUserInfo.add(mUserGit);
-        mUserInfo.add(mUserBio);
+        mUserInfo.add(userPhone);
+        mUserInfo.add(userMail);
+        mUserInfo.add(userVk);
+        mUserInfo.add(userGit);
+        mUserInfo.add(userBio);
 
         setupToolbar();
         setupDrawer();
@@ -74,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (savedInstanceState == null) {
             // активити запускается впервые
+            Log.d(TAG, "Activity запускается впервые");
         } else {
             //активити уже запускалось
             mCurrentEditMode = savedInstanceState.getInt(ConstantManager.EDIT_MODE_KEY, 0);
@@ -90,18 +101,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Вызывается при старте Activity перед тем как UI станет доступен пользователю.
+     * Как правило в данном методе происходит регистрация подписки на события, остановка которых
+     * была совершена в методе onStop
+     */
     @Override
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "onStart");
     }
 
+    /**
+     * Вызывается, когда UI становится доступен пользователю для взаимодействия.
+     * В данном методе происходит запуск анимаций / аудио / видео / запуск BroadcastReceiver
+     * необходимых для реализаций UI логики / запуск потоков и.т.д.
+     * Должен быть максимально легковесным для максимальной отзывчивости UI
+     */
     @Override
     protected void onResume() {
         super.onResume();
         Log.d(TAG, "onResume");
     }
 
+    /**
+     * Вызывается, когда текущая Activity теряет фокус, но остаётся видимой
+     * ( всплытие диалогового окна / частичное перекрытие другой Activity / и.т.д).
+     * <p/>
+     * В данном методе происходит сохранение легковесных UI данных / анимаций / видео / аудио и.т.д
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -110,18 +138,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         loadUserInfoValue();
     }
 
+    /**
+     * Вызывается, когда Activity становится невидимым для пользователя.
+     * В данном методе происходит отписка от событий, остоновка сложных анимаций, сложные операции
+     * по сохранению данных/прерывание запущенных потоков и.т.д
+     */
     @Override
     protected void onStop() {
         super.onStop();
         Log.d(TAG, "onStop");
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy");
-    }
-
+    /**
+     * Вызывается при рестарте Activity / возобновлении работы после вызова метода onStop.
+     * В данном методе реализуется специфическая бизнес - логика, которая должна сработать
+     * именно при рестарте Activity. Например : запрос к серверу, который необходимо совершать
+     * при возвращении из другого Activity  ( обновление данных, подписка на определенное
+     * событие проинициализированное на другом Activity / бизнес - логика завязанная именно на
+     * рестарте Activity
+     */
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -129,7 +164,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Обрабатывает click'и
+     * Вызывается при окончании работы Activity ( когда это происходит системно или после вызова
+     * метода finish() )
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy");
+    }
+
+    /**
+     * Обрабатывает click'и по экрану устройства
      * @param v - view которое click'нули
      */
     @Override
@@ -154,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Обрабатывает нажатия кнопки Back
+     * Обрабатывает нажатия кнопки системной кнопки Back
      */
     @Override
     public void onBackPressed() {
@@ -164,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Абстракный метод, который показывает Snackbar с переданным ей message
+     * Показывает Snackbar с переданным ей message
      * @param message - текст который будет показан в Snackbar'е
      */
     private void showSnackbar(String message) {
@@ -188,11 +233,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void setupDrawer() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        assert navigationView != null;
         View drawerHeader = navigationView.getHeaderView(0);
+        assert drawerHeader != null;
         ImageView avatar = (ImageView) drawerHeader.findViewById(R.id.drawer_header_avatar);
         Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.user_avatar);
-        mHeaderAvatar = new ImageCropper(img);
-        avatar.setImageDrawable(mHeaderAvatar);
+        ImageCropper headerAvatar = new ImageCropper(img);
+        avatar.setImageDrawable(headerAvatar);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -203,6 +250,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return false;
             }
         });
+    }
+
+    /**
+     * Обрабатывает результаты работы других Activity запущенных через startActivityForResult
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     /**
@@ -247,6 +305,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             userData.add(userFieldView.getText().toString());
         }
         mDataManager.getPreferencesManager().saveUserProfileData(userData);
+    }
+
+    /**
+     * Загружает фото из галлереи
+     */
+    private void loadPhotoFromGallery() {
+
+    }
+
+    /**
+     * Загружает фото из камеры
+     */
+    private void loadPhotoFromCamera() {
+
     }
 
 }

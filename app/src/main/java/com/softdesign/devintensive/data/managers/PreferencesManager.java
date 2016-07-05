@@ -18,6 +18,10 @@ public class PreferencesManager {
         this.mSharedPreferences = DevintensiveApplication.getSharedPreferences();
     }
 
+    /**
+     * Сохраняет данные пользователя в SharedPreferences
+     * @param userFileds
+     */
     public void saveUserProfileData(List<String> userFileds) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
 
@@ -27,6 +31,11 @@ public class PreferencesManager {
         editor.apply();
     }
 
+    /**
+     * Загружает данные пользователя из SharedPreferences, если они отсутствуют
+     * , то возвращает строку со значением null
+     * @return
+     */
     public List<String> loadUserProfileData() {
         List<String> userFields = new ArrayList<>();
         userFields.add(mSharedPreferences.getString(ConstantManager.USER_PHONE_KEY, "null"));
