@@ -29,6 +29,7 @@
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
             <ImageView
+                android:id="@+id/icon_call"
                 style="@style/icon.right"
                 android:src="@drawable/ic_phone_in_talk_grey_24dp"/>
         </LinearLayout>
@@ -54,6 +55,7 @@
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
             <ImageView
+                android:id="@+id/icon_sendto"
                 style="@style/icon.right"
                 android:src="@drawable/ic_send_grey_24dp"/>
         </LinearLayout>
@@ -79,6 +81,7 @@
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
             <ImageView
+                android:id="@+id/icon_vk_view"
                 style="@style/icon.right"
                 android:src="@drawable/ic_visibility_grey_24dp"/>
         </LinearLayout>
@@ -104,6 +107,7 @@
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
             <ImageView
+                android:id="@+id/icon_github_view"
                 style="@style/icon.right"
                 android:src="@drawable/ic_visibility_grey_24dp"/>
         </LinearLayout>

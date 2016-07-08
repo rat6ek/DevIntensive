@@ -1,6 +1,7 @@
 package com.softdesign.devintensive.data.managers;
 
 import android.content.SharedPreferences;
+import android.net.Uri;
 
 import com.softdesign.devintensive.utils.ConstantManager;
 import com.softdesign.devintensive.utils.DevintensiveApplication;
@@ -38,12 +39,30 @@ public class PreferencesManager {
      */
     public List<String> loadUserProfileData() {
         List<String> userFields = new ArrayList<>();
-        userFields.add(mSharedPreferences.getString(ConstantManager.USER_PHONE_KEY, "null"));
-        userFields.add(mSharedPreferences.getString(ConstantManager.USER_MAIL_KEY, "null"));
-        userFields.add(mSharedPreferences.getString(ConstantManager.USER_VK_KEY, "null"));
-        userFields.add(mSharedPreferences.getString(ConstantManager.USER_GIT_KEY, "null"));
-        userFields.add(mSharedPreferences.getString(ConstantManager.USER_BIO_KEY, "null"));
+        userFields.add(mSharedPreferences.getString(ConstantManager.USER_PHONE_KEY, "+79920000011"));
+        userFields.add(mSharedPreferences.getString(ConstantManager.USER_MAIL_KEY, "google@gmail.com"));
+        userFields.add(mSharedPreferences.getString(ConstantManager.USER_VK_KEY, "vk.com"));
+        userFields.add(mSharedPreferences.getString(ConstantManager.USER_GIT_KEY, "github.com"));
+        userFields.add(mSharedPreferences.getString(ConstantManager.USER_BIO_KEY, "Lorem impsum"));
         return userFields;
+    }
+
+    /**
+     * Сохраняет в SharedPreferences установленное пользователем фото
+     * @param uri
+     */
+    public void saveUserPhoto(Uri uri) {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString(ConstantManager.USER_PHOTO_KEY, uri.toString());
+        editor.apply();
+    }
+
+    /**
+     * Загружает из SharedPreferences установленное пользователем фото
+     * @return
+     */
+    public Uri loadUserPhoto() {
+        return Uri.parse(mSharedPreferences.getString(ConstantManager.USER_PHONE_KEY, "android.resource://com.softdesign.devintensive/drawable/user_photo"));
     }
 
 }

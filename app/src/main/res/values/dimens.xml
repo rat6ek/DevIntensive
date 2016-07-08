@@ -21,4 +21,8 @@
     <dimen name="profile_image_size">256dp</dimen>
     <dimen name="fab_right_space">8dp</dimen>
     <dimen name="size_112">112dp</dimen>
+    <dimen name="placeholder_photo_size_90">90dp</dimen>
+    <dimen name="spacing_medium_28">28dp</dimen>
+    <dimen name="regular_24">24sp</dimen>
+    <dimen name="medium_14">14sp</dimen>
 </resources>
