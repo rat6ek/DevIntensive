@@ -27,4 +27,16 @@
     <string name="project_value">5</string>
     <string name="project_text">Проектов</string>
     <string name="user_score_behavior">com.softdesign.devintensive.utils.UserScoreBehavior</string>
+    <string name="user_profile.placeholder.image">Изменить фотографию пользователя</string>
+    <string name="user_profile_dialog_gallery">Загрузить из галлереи</string>
+    <string name="user_profile_dialog_camera">Сделать снимок</string>
+    <string name="user_profile_dialog_cancel">Отмена</string>
+    <string name="user_profile_dialog_title">Изменить фотографию профиля</string>
+    <string name="user_profile_choose_message">выберите фото</string>
+    <string name="login_log_in.text">Войти</string>
+    <string name="login_forgot_text">Забыли пароль?</string>
+    <string name="password_text">Пароль</string>
+    <string name="login_text">Войти</string>
+    <string name="get_password">Забыли пароль?</string>
+    <string name="email_user">E-mail</string>
 </resources>

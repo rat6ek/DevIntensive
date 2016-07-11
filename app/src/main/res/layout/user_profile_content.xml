@@ -1,0 +1,140 @@
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/item_ll">
+            <ImageView
+                style="@style/icon.left"
+                android:src="@drawable/ic_call_grey_24dp"/>
+            <LinearLayout
+                style="@style/item_inner_ll">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        style="@style/edit_text"
+                        android:id="@+id/phone_et"
+                        android:hint="@string/item_1"
+                        android:inputType="phone"
+                        android:text="@string/item_1_text"/>
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/icon_call"
+                style="@style/icon.right"
+                android:src="@drawable/ic_phone_in_talk_grey_24dp"/>
+        </LinearLayout>
+
+        <View style="@style/horizontal_line"/>
+
+        <LinearLayout
+            style="@style/item_ll">
+            <ImageView
+                style="@style/icon.left"
+                android:src="@drawable/ic_email_grey_24dp"/>
+            <LinearLayout
+                style="@style/item_inner_ll">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        style="@style/edit_text"
+                        android:id="@+id/email_et"
+                        android:hint="@string/item_2"
+                        android:inputType="textEmailAddress"
+                        android:text="@string/item_2_text"/>
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/icon_sendto"
+                style="@style/icon.right"
+                android:src="@drawable/ic_send_grey_24dp"/>
+        </LinearLayout>
+
+        <View style="@style/horizontal_line"/>
+
+        <LinearLayout
+            style="@style/item_ll">
+            <ImageView
+                style="@style/icon.left"
+                android:src="@drawable/ic_vk_grey_24dp"/>
+            <LinearLayout
+                style="@style/item_inner_ll">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        style="@style/edit_text"
+                        android:id="@+id/vk_profile_et"
+                        android:hint="@string/item_3"
+                        android:inputType="textUri"
+                        android:text="@string/item_3_text"/>
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/icon_vk_view"
+                style="@style/icon.right"
+                android:src="@drawable/ic_visibility_grey_24dp"/>
+        </LinearLayout>
+
+        <View style="@style/horizontal_line"/>
+
+        <LinearLayout
+            style="@style/item_ll">
+            <ImageView
+                style="@style/icon.left"
+                android:src="@drawable/ic_github_grey_24dp"/>
+            <LinearLayout
+                style="@style/item_inner_ll">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/github_et"
+                        style="@style/edit_text"
+                        android:hint="@string/item_4"
+                        android:inputType="textUri"
+                        android:text="@string/item_4_text"/>
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/icon_github_view"
+                style="@style/icon.right"
+                android:src="@drawable/ic_visibility_grey_24dp"/>
+        </LinearLayout>
+
+        <View style="@style/horizontal_line"/>
+
+        <LinearLayout
+            style="@style/item_ll">
+            <ImageView
+                style="@style/icon.left"
+                android:src="@drawable/ic_account_circle_grey_24dp"/>
+            <LinearLayout
+                style="@style/item_inner_ll">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/about_et"
+                        style="@style/edit_text"
+                        android:hint="@string/item_5"
+                        android:text="@string/item_5_text"
+                        android:inputType="textMultiLine"
+                        />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
